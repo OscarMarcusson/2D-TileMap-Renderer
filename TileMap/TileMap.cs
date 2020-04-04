@@ -107,18 +107,17 @@ public class TileMap : MonoBehaviour
     }
 
 
+    // Avoid a memory leak in case this objects get destroyed, yay for Unity specific garbage handling that doesn't work on its own :)
     private void OnDestroy()
     {
-        // Avoid a memory leak in case this objects get destroyed, yay for Unity specific garbage handling that doesn't work on its own :)
         Destroy(m_material);
     }
 
 
 #if UNITY_EDITOR
+    // Render a green quad in the editor to show the area we are working with.
     private void OnDrawGizmosSelected()
     {
-        // Render a green quad in the editor to show the area we are working with.
-
         Gizmos.color = new Color(0f, 1f, 0f, 0.1f);
         Vector3 size = new Vector3(m_width, m_height, 0.001f);
         Vector3 position = transform.position + size * 0.5f;
